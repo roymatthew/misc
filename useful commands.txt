@@ -1,0 +1,1 @@
+xcopy /y C:\Users\rmathew\eclipse-workspace\processing\realtime\target\processing.war C:\development\{server instance}\standalone\deployments
