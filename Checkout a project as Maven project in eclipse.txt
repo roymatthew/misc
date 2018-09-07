@@ -1,0 +1,10 @@
+
+
+Using CVS Repository checkout the project in eclipse.
+Go to Import
+Select "Existing Maven Projects"
+Select the root folder where the checked out stuff resides
+It will list all non-imported modules as module/pom.xml
+Un-select all if there are more than one
+Select the one you need to import
+Click "Finish" button

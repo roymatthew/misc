@@ -1,0 +1,8 @@
+
+If elcipse stops loading contents or shutsdown throwing error relate to "No more handles"
+
+I had the same problem. Deleting .metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi worked. I am not sure of the root cause, though.
+
+OR
+
+Move the contents of "plugins" folder to some other folder and restart eclipse. Eclipse will add all these plugins after restart. Replace the new folders with the copied folders.

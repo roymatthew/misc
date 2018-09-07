@@ -1,0 +1,2 @@
+How to createa flagstar maven project using archetype
+mvn -DarchetypeGroupId=com.fsb -DarchetypeArtifactId=fsb-archetype -DarchetypeVersion=0.9 -DgroupId=[com.fsb.mortgage] -DartifactId=[mortgage-domain-objects]  -Dversion=1.0-SNAPSHOT -DinteractiveMode=false archetype:generate 

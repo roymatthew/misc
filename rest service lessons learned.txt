@@ -1,0 +1,55 @@
+Why ajax doesn't hit the rest service.
+=====================================
+
+if everything else looks good, 
+try REST service tool from Firefox or similar
+It might say service not available
+Take a look at the service implementation class to see
+if it has the @Service("service name") annotation
+at class level.
+
+You may also check any dependent DAOs have
+@Repository("DAO name") coded at class level.
+
+
+
+JSON 
+
+Response Code 400 - Bad Request
+check the request to see if the object being posted matches the strutcture expected at the controller.
+Even the property attribute name case matters.
+
+
+CORS / Cross Domain
+
+Server must allow cross domain request
+
+Basic configuration In tomcat server 
+In web.xml add a filter as below
+==========================================================================
+ <filter>
+  <filter-name>CorsFilter</filter-name>
+  <filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
+  <init-param>
+    <param-name>cors.allowed.origins</param-name>
+    <param-value>*</param-value>
+  </init-param>  
+</filter>
+<filter-mapping>
+  <filter-name>CorsFilter</filter-name>
+  <url-pattern>/*</url-pattern>
+</filter-mapping>
+=============================================================================
+
+
+*************************
+POST returns bad request (when submitting JSON in request body with wrong attribute name
+ie attribute name on JSON object and mapped Java DTO did not match)
+
+2014-12-11 10:53:39,470 DEBUG [org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver] - Resolving exception from handler [public com.fsb.lending.core.client.lenderapp.dto.LenderAppObj com.fsb.lending.core.realtime.lenderapp.LenderAppController.createBrokerApp(com.fsb.lending.core.client.lenderapp.dto.LenderAppObj)]: org.springframework.http.converter.HttpMessageNotReadableException: Could not read JSON: Unrecognized field "zipCode" (Class com.fsb.lending.core.client.lenderapp.dto.AddressObj), not marked as ignorable
+ at [Source: org.apache.catalina.connector.CoyoteInputStream@5c638bbc; line: 18, column: 19] (through reference chain: com.fsb.lending.core.client.lenderapp.dto.LenderAppObj["lenderObj"]->com.fsb.lending.core.client.lenderapp.dto.LenderObj["address"]->com.fsb.lending.core.client.lenderapp.dto.AddressObj["zipCode"]); nested exception is org.codehaus.jackson.map.exc.UnrecognizedPropertyException: Unrecognized field "zipCode" (Class com.fsb.lending.core.client.lenderapp.dto.AddressObj), not marked as ignorable
+ at [Source: org.apache.catalina.connector.CoyoteInputStream@5c638bbc; line: 18, column: 19] (through reference chain: com.fsb.lending.core.client.lenderapp.dto.LenderAppObj["lenderObj"]->com.fsb.lending.core.client.lenderapp.dto.LenderObj["address"]->com.fsb.lending.core.client.lenderapp.dto.AddressObj["zipCode"])
+2014-12-11 10:53:39,470 DEBUG [org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver] - Invoking @ExceptionHandler method: public final org.springframework.http.ResponseEntity<java.lang.Object> org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler.handleException(java.lang.Exception,org.springframework.web.context.request.WebRequest)
+2014-12-11 10:53:39,470 DEBUG [org.springframework.web.servlet.DispatcherServlet] - Null ModelAndView returned to DispatcherServlet with name 'spring-mvc': assuming HandlerAdapter completed request handling
+2014-12-11 10:53:39,470 DEBUG [org.springframework.web.servlet.DispatcherServlet] - Successfully completed request
+**************************************************

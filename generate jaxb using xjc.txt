@@ -1,0 +1,2 @@
+C:\development>genjaxb.bat C:\workspace\core\core-web\realtime\src\main\resources\wsdl\LenderAdvocatesServiceDescription
+.xsd -d c:\development\garage\jaxbcode\

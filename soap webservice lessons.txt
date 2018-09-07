@@ -1,0 +1,31 @@
+SOAP webservice using spring ws
+================================
+
+1. If dynamically generating WSDL from XSD, give a meaningful name space.
+   Use the same name space in the EndPoint implementation class.
+   Eg: <xs:schema xmlns="http://lenderadvocates.flagstar.com"
+	targetNamespace="http://lenderadvocates.flagstar.com" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	
+	In EndPoint implementation,
+	
+	private static final String NAMESPACE_URI = "http://lenderadvocates.flagstar.com";
+
+		
+    @PayloadRoot(localPart = "GetLenderAdvocatesRequest", namespace = NAMESPACE_URI)    
+    @ResponsePayload    
+    public AdvocateIVRDTO getLenderAdvocateInfo(@XPathParam("//lenderId") final String lenderId)
+    throws LenderNotFoundException
+	
+2. If the end point method has     @PayloadRoot and   @ResponsePayload annotations used adding JAXBElement to my endpoint is a must.
+
+ 
+3. <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:len="http://lenderadvocates.flagstar.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <len:GetLenderAdvocatesRequest>
+	               <request>
+	               	<lenderId>11622</lenderId>
+	               </request>
+      </len:GetLenderAdvocatesRequest>
+   </soapenv:Body>
+</soapenv:Envelope>

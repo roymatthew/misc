@@ -1,0 +1,134 @@
+
+Under linux, I launch a software by typing, e.g., fluidplot. How can I find the installation path for this software?
+which fluidpoint
+
+rpm -ql findutils
+/bin/find
+/usr/bin/find
+/usr/bin/xargs
+/usr/share/doc/packages/findutils
+/usr/share/doc/packages/findutils/AUTHORS
+/usr/share/doc/packages/findutils/COPYING
+/usr/share/doc/packages/findutils/NEWS
+/usr/share/doc/packages/findutils/README
+/usr/share/doc/packages/findutils/THANKS
+/usr/share/doc/packages/findutils/TODO
+/usr/share/info/find.info.gz
+/usr/share/man/man1/find.1.gz
+
+Things aren't installed to locations in the Linux/UNIX world like they are in the Windows (and even somewhat in the Mac) world. They are more distributed. Binaries are in /bin or /sbin, libraries are in /lib, icons/graphics/docs are in /share, configuration is in /etc and program data is in /var. The /bin,lib,sbin contain the core applications needed for booting and the /usr contains all the other user and system applications 
+
+
+
+Tips and Tricks for Linux Mint
+http://www.techsupportalert.com/content/tips-and-tricks-mint-after-installation-mint-13-cinnamon-edition.htm#Pin-Programs-to-the-Panel
+
+
+
+Set JAVA_HOME / PATH for a single user
+
+Login to your account and open .bash_profile file
+$ vi ~/.bash_profile
+Set JAVA_HOME as follows using syntax export JAVA_HOME=<path-to-java>. If your path is set to /usr/java/jdk1.5.0_07/bin/java, set it as follows:
+export JAVA_HOME=/usr/java/jdk1.5.0_07/bin/java
+Set PATH as follows:
+export PATH=$PATH:/usr/java/jdk1.5.0_07/bin
+Feel free to replace /usr/java/jdk1.5.0_07 as per your setup. Save and close the file. Just logout and login back to see new changes. Alternatively, type the following command to activate the new path settings immediately:
+$ source ~/.bash_profile
+OR
+$ . ~/.bash_profile
+Verify new settings:
+$ echo $JAVA_HOME
+$ echo $PATH
+********************************************************
+
+To Install the JDK Software and Set JAVA_HOME on a UNIX System
+http://docs.oracle.com/cd/E19182-01/821-0917/inst_set_jdk_korn_bash_t/index.html
+
+Starting JBOSS as a service
+https://community.jboss.org/wiki/HowToInstallJBossAS7AsALinuxService
+
+
+StartJBossOnBootWithLinux
+https://community.jboss.org/wiki/StartJBossOnBootWithLinux
+
+install jboss and java in linux mint
+http://tutorialforlinux.com/2013/10/24/how-to-install-jboss-7-on-linux-mint-15-kde-linux-step-by-step-easy-guide/
+
+
+[solved] Default Folder issues (help, I'm stupid!)...
+http://forums.linuxmint.com/viewtopic.php?f=206&t=137359
+
+How To Save Downloaded Files to Selected Folders based on Filters
+http://community.linuxmint.com/tutorial/view/347
+
+mysql
+http://dev.mysql.com/downloads/
+
+
+
+camera
+http://programmaticponderings.wordpress.com/2013/01/01/remote-motion-activated-web-based-video-surveillance-with-raspberry-pi/
+with box.com storage
+http://astroland.funxiun.com/using-the-raspberry-pi-for-camera-surveillance-using-motion-and-cloud-storage/
+http://www.codeproject.com/Articles/665518/Raspberry-Pi-as-low-cost-HD-surveillance-camera
+garage door opener
+http://www.raspberrypi.org/phpBB3/viewtopic.php?f=37&t=55945
+ubuntu and motion
+http://www.chriswpage.com/2009/05/setup-an-advanced-webcam-security-system-with-ubuntu-8-04-and-motion/
+
+
+disk allocation
+http://www.tldp.org/LDP/sag/html/alloc-disk.html
+Table 5-3. My Partitions
+9 GB	root filesystem
+1 GB	swap partition
+5 GB	/var filesystem
+15 GB	/home filesystem
+8 GB	/usr filesystem
+2 GB	scratch partition
+
+
+
+easiest VPN in the world
+
+ssh -ND 1080 root@RemoteIP
+
+your distro should already have a SSH server, so just put this command in your computer that needs a VPN. Open up firefox and set Socks proxy to 127.0.0.1 port 1080 and you have yourself a proxy/VPN
+
+uses of pi
+http://www.reddit.com/r/AskReddit/comments/1f607z/owners_of_a_raspberry_pi_what_do_you_use_it_for
+
+
+to see something like a device manager in windows
+------------------------------------------------------
+You can install a package called HardInfo that will give you hardware information and details... www.getdeb.net
+
+setserial command
+
+setserial is a program designed to set and/or report the configuration information associated with a serial port. This information includes what I/O port and IRQ a particular serial port is using, and whether or not the break key should be interpreted as the Secure Attention Key, and so on. Just type the following command:
+$ setserial -g /dev/ttyS[0123]
+
+To read data from serial port into java app
+http://stackoverflow.com/questions/15996345/java-arduino-read-data-from-the-serial-port
+
+find driver info, software for different audio/video applications
+http://www.exploits.org/v4l/
+
+Use for old cell phone screens
+------------------------------
+http://www.starlino.com/nokia_lcd_connect.html
+
+http://elinux.org/RPi_Screens
+
+
+Linux apps
+-----------
+http://www.getdeb.net/updates/Ubuntu/13.10#how_to_install
+
+DomotiGa is Open Source Home Automation Software from the Netherlands. It is written in Gambas Basic and runs on Linux, you can read all kinds of sensor values with it, let it detect motion and schedule lights at certain times by the use of several hardware, for example an RFXCom receiver, Xanura CTX35 A10/X10 controller and Midon TEMP08 1-wire interface and more.
+
+http://www.domotiga.nl/projects/domotiga/wiki/Hardware_RaspberryPi
+
+
+http://www.domotiga.nl/projects/domotiga/wiki/1_Introduction

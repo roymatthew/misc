@@ -1,0 +1,25 @@
+        Mockito
+            .when(this.serviceProviderService.updateServiceProvider(any(ServiceProviderDTO.class), any(UserDTO.class)))
+            .thenThrow(new BadRequestException("MockedBadRequestException"));
+        final RequestBuilder request =
+            MockMvcRequestBuilders.put("/serviceprovider/lender/{lenderKey}", Long.valueOf(3430))
+                .header(USER_PROFILE_HEADER, getUserProfileHeader()).contentType(MediaType.APPLICATION_JSON)
+                .content(body).accept(MediaType.APPLICATION_JSON);
+        final String responseBody = mockMvc.perform(request).andExpect(MockMvcResultMatchers.status().isBadRequest())
+            .andReturn().getResolvedException().getMessage();
+        Assert.assertTrue(responseBody.contains("MockedBadRequestException"));
+
+
+
+        final RequestBuilder request = MockMvcRequestBuilders.get("/serviceprovider/lender/{lenderKey}?loanNumber={loanNumber}", lenderKey, LOAN_NUMBER)
+            .header(USER_PROFILE_HEADER, getUserProfileHeader());
+        final String responseBody = mockMvc.perform(request).andExpect(MockMvcResultMatchers.status().is5xxServerError())
+            .andReturn().getResolvedException().getMessage();
+
+
+
+
+        final MvcResult result = mockMvc.perform(request).andExpect(MockMvcResultMatchers.status().isOk())
+        .andExpect(jsonPath("$.validPricing").value(Boolean.TRUE))
+        .andReturn();
+        System.out.println("testgetRepriceInfoResponseNo: " + result.getResponse().getContentAsString());

@@ -1,0 +1,13 @@
+SimpleJdbcCall - MapSqlParameterSource - to set a null value, use java null keyword not Types.NULL
+
+
+When setting a null parameter value to PreparedStatement
+use Types.NULL as in below example
+            if (newCondition.getConditionRuleKey().longValue() > 0 )
+            {
+                pStat.setLong(6, newCondition.getConditionRuleKey().longValue());
+            }
+            else
+            {
+                pStat.setNull(6, Types.NULL);               
+            }

@@ -1,0 +1,5 @@
+1de0797c02144461aeae2e2fc9533615
+
+
+java -jar jenkins.war --httpPort=9090
+

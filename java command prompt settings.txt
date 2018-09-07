@@ -1,0 +1,12 @@
+set _JAVA_OPTIONS=-Xmx512M
+
+when java-version and javac -version are different, for maven to work
+set the JAVA_HOME env variable to the version of java the code was compiled with
+set JAVA_HOME=C:\Program Files (x86)\Java\jdk1.7.0_80
+
+
+
+
+setting java home to jdk 8
+
+set JAVA_HOME=C:\Program Files (x86)\Java\jdk1.8.0_77

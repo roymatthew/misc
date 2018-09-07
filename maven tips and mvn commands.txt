@@ -1,0 +1,85 @@
+
+
+running mvn in offline mode
+
+E.g., mvn -o install
+
+
+mvn -o jar:jar
+
+To skip running tests
+
+>mvn package -DskipTests=true
+
+mvn install -DskipTests=true
+
+To skip test compilation and execution
+
+>mvn package -Dmaven.test.skip=true
+
+mvn -Dtest=name.java test
+
+
+dependency tree
+
+mvn dependency:analyze
+
+to get dependency report as HTML
+
+mvn dependency:analyze-report
+
+In order to use dependency:analyze-report, the following block must appear in the POM:
+
+            <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>
+                     maven-dependency-plugin
+                 </artifactId>
+                 <version>2.6</version>
+                 <executions>
+                     <execution>
+                         <id>copy</id>
+                         <phase>package</phase>
+                     </execution>
+                 </executions>
+             </plugin>
+
+
+
+
+mvn jboss:hard-deploy
+
+
+
+mvn -Dtest=QueuePriorityRuleDAOImplTest.java test
+
+To clean, rebuild and generate WAR without running tests.
+--------------------------------------------------------
+mvn clean install -DskipTests=true
+
+
+Exception when trying to release "You don't have a SNAPSHOT project in the reactor projects list"
+http://stackoverflow.com/questions/13513758/maven-release-plugin-snapshot-project-needed
+
+
+
+
+Generating a WAR
+
+	<build>
+        <finalName>mdb</finalName>	
+		<plugins>
+		.
+		.
+		.
+					<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.1.1</version>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+                    <webApp>
+                        <contextPath>/mdb</contextPath>
+                    </webApp>					
+				</configuration>
+			</plugin>

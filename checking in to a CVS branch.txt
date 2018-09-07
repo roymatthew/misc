@@ -1,0 +1,34 @@
+From CVS
+********************************************************************
+
+1. select the file to check out
+2. right click on the class and select update --> update options
+3. check the check box "retrieve by version/tag/branch" under sticky options
+4. select or type in the branch name
+5. click OK
+6. now the file is available in our file system
+7. make the desired changes
+8. check in
+
+
+
+From eclipse
+**************
+
+1. select the file 
+2. right click and select "Replace with another branch or version"
+3. select whatever tag (staging/production etc)
+4. that would make the selected version your current working version
+5. from CVS history tab, right click and select "Create Branch"
+6. Give a name to the branch
+7. This will create a tag with name as given in the previous step
+8. make whatever change you want to make to the file
+9. Check in the file
+10. this will create a new version in the branch
+
+
+
+
+SkipUnittestBecause dto
+
+

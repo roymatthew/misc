@@ -1,0 +1,20 @@
+Adding files to GIT
+===================
+
+git status
+
+git add .
+
+git commit -m "your message for the commit" 
+
+
+
+Removing files from git
+========================
+git rm -r --cached . (this removes only the cache, the acrtual files will stay)
+git add . (all files will be staged)
+git commit -m "some message"
+git push
+
+
+

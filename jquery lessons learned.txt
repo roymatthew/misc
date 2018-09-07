@@ -1,0 +1,129 @@
+to test jquery from local html code, the jquery.js version has to less than 1.4
+firefox doesn't allow jquery from local html code. Has to be from html/jsp deployed on  the container.
+
+
+when sending data by $.ajax with type = 'PUT', server side     @RequestMapping(value = "/loan/queue/priority/rule/manager", method = RequestMethod.PUT)
+method cannot be method = RequestMethod.POST.
+
+
+
+Retreiving text box values
+
+1. for unique text boxes use id method
+
+		<input type="text" id="txtSample"/>
+
+		var textVal = $('#txtSample').val();
+		
+2. Multiple text boxes from a table
+
+	var textVal;
+		$('#your_table_id tr').each(function(i) {
+			textVal = $(this).find("input").eq(0).val();
+	
+		}
+
+Retreiving and setting table column values
+
+var colVal = $('#DateTimeTable').find("td").eq(3).text();
+$('#DateTimeTable').find("td").eq(3).text("set a value");
+
+Retrieving select box values from a table
+
+	$('#DocumentDetails tr').each(function(i) {
+
+		var qpriority = $(this).find("select").eq(0).val();
+		
+	}
+
+
+Checking if a check box is checked
+
+	$("input[type=checkbox][checked]").each(
+	    function() {
+
+	    		qKey = $(this).val();
+
+	    }
+	);
+
+
+
+To check a checkbox
+
+jquery 1.5 and beyond
+
+$(".myCheckbox").prop("checked", true);
+$(".myCheckbox").prop("checked", false);
+
+
+The .prop() function is not available so you need to use .attr()
+
+To check the checkbox (by setting the value of the checked attribute)
+
+$('.myCheckbox').attr('checked','checked')
+
+and un-checking (by removing the attribute entirely)
+
+$('.myCheckbox').removeAttr('checked')
+
+
+	if($("#cbxActive").attr('checked') == true)
+	{
+		vInactive = 'Y';
+	}
+
+
+
+$(ele).find(':input').each(function() 
+	{
+		switch(this.type) {
+		case 'password':
+		case 'select-multiple':
+		case 'select-one':
+		case 'text':
+		case 'textarea':
+		$(this).val('');
+		break;
+		case 'checkbox':
+		case 'radio':
+		this.checked = false;
+	}
+});
+
+
+JQUERY confirm box
+***************************************************************************************************************
+    /*$("#dialog-confirm").dialog({
+        autoOpen: false
+    });*/
+    
+	/*$( "#dialog-confirm" ).dialog({
+		resizable: false,
+		height:140,
+		width:500,					
+		modal: true,
+		buttons: {
+			"Proceed": function() {
+				$( this ).dialog( "close" );
+				saveDocInfo();
+				checkNSaveLoan();				
+			},
+			Cancel: function() {
+				$( this ).dialog( "close" );
+				return false;
+			}
+		}
+	});*/
+
+****************************************************************************************************************
+To convert an object to a string, use JSON.stringify:
+
+var json_text = JSON.stringify(your_object, null, 2);
+
+To convert a string to JSON object, use JSON.parse:
+
+var your_object = JSON.parse(json_text);
+***********************************************************************************************
+find the parent row of a check box and get/update another column in that row
+$(this).closest('tr').find('textarea').val("some text");

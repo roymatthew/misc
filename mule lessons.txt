@@ -1,0 +1,2 @@
+Wrong index checksum, store was not closed properly and could be corrupted.
+Pressuming you're runnig Anyypoint Studio from windows, follow the below steps: - Close the Anypoint Studio - Launch windows task Manager and check for process - javaw and End it. - restart Anypoint Studio This should fix the issue. If it did, mark this as the best answer

@@ -1,0 +1,37 @@
+
+
+
+		$("#shelfInvTable tbody").click(function(event) {
+
+			$(shelfInvDataTable.fnSettings().aoData).each(function (){
+				$(this.nTr).removeClass('row_selected');
+			});
+
+			$(event.target.parentNode).addClass('row_selected');
+		});
+
+
+		//shelfInvDataTable.fnDeleteRow($(this.nTr));
+		
+		
+				//shelfInvDataTable.fnUpdate();
+				
+				
+	$("input[type=radio][checked]").each(
+	    function() {
+
+
+
+	    }
+	);	
+
+-----------------------------------------------------------------------------------------
+
+spacing issues			
+
+problem: datables put extra spaces before the table
+resolution: avoid putting align = center for the table
+
+-----------------------------------------------------------------------------------------
+Issue: inner division data table stays partially hidden until clicked
+cause: variable for the table not declared

@@ -1,0 +1,15 @@
+
+up vote
+9
+down vote
+Java 7 defaults to TLS 1.0, which can cause this error when that protocol is not accepted. I ran into this problem with a Tomcat application and a server that would not accept TLS 1.0 connections any longer. I added
+
+-Dhttps.protocols=TLSv1.1,TLSv1.2
+to the Java options and that fixed it. (Tomcat was running Java 7.)
+
+
+http://superuser.com/questions/747377/enable-tls-1-1-and-1-2-for-clients-on-java-711:57 AM
+i think you would add something like -Dhttps.protocols=TLSv1.1 to use only TLSv1.1
+
+
+https://www.java.com/en/download/help/java_blocked.xml

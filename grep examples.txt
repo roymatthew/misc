@@ -1,0 +1,37 @@
+
+grep -n -i -r 'variable: username=m2earlycheck->FBC'
+
+
+tail -1000 /net/beaapp3/export/logs/mortracJboss/mortracapp.log | grep -n -i -r 'variable: username=m2earlycheck->FBC'
+******************************************************************************************************************************
+To match a line starting with an expression
+and any character any number of times in middle 
+and then a terminating pattern
+
+grep -n -i -r '^17 Jun 2014.*variable: username=m2earlycheck->FBC' /net/beaapp2/export/logs/mortracJboss/mortracapp.log
+******************************************************************************************************************************
+
+find the number of lines matching the grep expression using pipe and wc -l
+
+grep -n -i -r '^17 Jun 2014.*variable: username=m2earlycheck->FBC' /net/beaapp1/export/logs/mortracJboss/mortracapp.log | wc -l
+
+==================================================================================================================================
+
+to run tail on the given file every 3 seconds
+
+watch -n 3 tail -2 /net/beaapp1/export/logs/mortracJboss/mortracapp.log
+
+=================================================================================================================================
+
+Total count of number of lines in a file
+
+wc -l < /net/beaapp1/export/logs/mortracJboss/mortracapp.log
+
+==================================================================================================================================
+
+
+sed -n '114650,114654p;114654q' /net/jbappd1/export/logs/mortracJboss/mortracapp.log
+
+
+
+
