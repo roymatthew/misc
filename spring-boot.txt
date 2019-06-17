@@ -1,0 +1,7 @@
+
+
+To set the active profile of a spring boot application deployed to JBoss server, to different values, add the following xml element in standalone.xml.
+
+	<system-properties>
+        <property name="spring.profiles.active" value="your environment name"/>
+  </system-properties>
