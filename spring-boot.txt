@@ -5,3 +5,8 @@ To set the active profile of a spring boot application deployed to JBoss server,
 	<system-properties>
         <property name="spring.profiles.active" value="your environment name"/>
   </system-properties>
+
+
+SpringBoot Tomat
+-jsypt encryptor password
+export CATALINA_OPTS=”-Djasypt.encryptor.password=MY_SECRET”
