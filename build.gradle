@@ -1,0 +1,99 @@
+plugins {
+	id 'org.springframework.boot' version '2.1.6.RELEASE'
+	id 'java'
+	id 'maven'
+	id 'maven-publish'
+}
+
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'maven'
+apply plugin: "java"
+apply plugin: 'maven-publish'
+
+group = 'com.ode.util.commons'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
+
+repositories {
+	mavenLocal()
+	maven {
+		credentials {
+			username 'nexus-connect'
+			password 'i5jPEA&icQTTuwBVSx'
+		}
+		url = uri("http://ode-nexus.opendealerexchange.com:8081/repository/maven-public")
+	}
+}
+
+sourceSets {
+
+	    main{
+	        java {
+	            srcDir 'src/main/java'
+	        }
+	    }
+	    test {
+	        java {
+		            srcDir 'src/test/java'
+	        }
+	    }
+	}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5'
+	compile group: 'org.apache.commons', name: 'httpclient', version: '3.1'
+	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'	
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+
+jar {
+enabled = true
+}
+
+processResources {
+	expand(project.properties)
+}
+
+	uploadArchives {
+	    repositories {
+	        mavenDeployer {
+					repository(url: "http://ode-nexus.opendealerexchange.com:8081/repository/maven-snapshots/") {
+ 					authentication(userName: "nexus-connect", password: "i5jPEA&icQTTuwBVSx")
+	            }
+	            
+	        }
+	    }
+	}
+	
+	publishing {
+        publications {
+            mavenJava (MavenPublication) {
+                groupId = 'com.ode.commons.util'
+                artifactId = 'de-util-commons'
+                def date = new Date()
+                version = '1.0.0'
+
+                from components.java
+            }
+        }
+		repositories {
+		    maven {
+
+		        url = "http://ode-nexus.opendealerexchange.com:8081/repository/maven-releases/"
+				credentials {
+				    username = 'nexus-connect'
+				    password = 'i5jPEA&icQTTuwBVSx'
+				}		        		        
+		    }
+		}        
+    }
+
+test {
+	ignoreFailures = true
+}
