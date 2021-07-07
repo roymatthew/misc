@@ -1,0 +1,30 @@
+                <datasource jta="true" jndi-name="java:/com/ode/jdbc/sqlserver2/ds" pool-name="MSSQLDS2" enabled="true" use-ccm="true">
+                    <connection-url>jdbc:sqlserver://10.150.5.33:1433;DatabaseName=RULESENGINE</connection-url>
+                    <driver-class>com.microsoft.sqlserver.jdbc.SQLServerDriver</driver-class>
+                    <driver>sqlserver</driver>
+                    <security>
+                        <user-name>rudbuser</user-name>
+                        <password>Superior@2018</password>
+                    </security>
+                    <validation>
+                        <valid-connection-checker class-name="org.jboss.jca.adapters.jdbc.extensions.mssql.MSSQLValidConnectionChecker"/>
+                        <background-validation>true</background-validation>
+                        <exception-sorter class-name="org.jboss.jca.adapters.jdbc.extensions.mssql.MSSQLExceptionSorter"/>
+                    </validation>
+                </datasource>
+				
+				
+				<datasource jta="true" jndi-name="java:/com/ode/jdbc/sqlserver3/ds" pool-name="MSSQLDS3" enabled="true" use-ccm="true">
+                    <connection-url>jdbc:sqlserver://ode-devsql01:1433/DEX_DEV</connection-url>
+                    <driver-class>com.microsoft.sqlserver.jdbc.SQLServerDriver</driver-class>
+                    <driver>sqlserver</driver>
+                    <security>
+                        <user-name>jbossdevsqluser</user-name>
+                        <password>devuser</password>
+                    </security>
+                    <validation>
+                        <valid-connection-checker class-name="org.jboss.jca.adapters.jdbc.extensions.mssql.MSSQLValidConnectionChecker"/>
+                        <background-validation>true</background-validation>
+                        <exception-sorter class-name="org.jboss.jca.adapters.jdbc.extensions.mssql.MSSQLExceptionSorter"/>
+                    </validation>
+                </datasource>

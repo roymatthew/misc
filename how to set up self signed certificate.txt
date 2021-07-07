@@ -1,0 +1,56 @@
+
+In case you are using Spring, it could be reached by RestTemplate:
+
+public RestTemplate restTemplate() throws Exception {
+    KeyStore clientStore = KeyStore.getInstance("PKCS12");
+    InputStream resource = this.getClass().getClassLoader().getResourceAsStream("path_to_certificate.p12");
+    clientStore.load(resource, "p12_password".toCharArray());
+
+    SSLContextBuilder sslContextBuilder = new SSLContextBuilder();
+    sslContextBuilder.setProtocol("TLS");
+    sslContextBuilder.loadKeyMaterial(clientStore, "p12_password".toCharArray());
+    sslContextBuilder.loadTrustMaterial(new TrustSelfSignedStrategy());
+
+    SSLConnectionSocketFactory sslConnectionSocketFactory = new SSLConnectionSocketFactory(sslContextBuilder.build());
+    CloseableHttpClient httpClient = HttpClients.custom()
+        .setSSLSocketFactory(sslConnectionSocketFactory)
+        .build();
+    HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory(httpClient);
+    return new RestTemplate(requestFactory);
+}
+
+
+
+
+
+---------------------------------------------
+
+Generate CA cert
+
+req -x509 -sha256 -days 3650 -newkey rsa:4096 -keyout rootCA.key -out rootCA.crt
+used password - changeit
+used CN name - rmathew
+
+req -new -newkey rsa:4096 -keyout localhost.key -out localhost.csr
+used password - changeit
+created a localhost.ext file
+
+
+
+keytool -importkeystore -srckeystore localhost.p12 -srcstoretype PKCS12 -destkeystore keystore.jks -deststoretype JKS
+
+keytool -import -trustcacerts -noprompt -alias ca -ext san=dns:localhost,ip:127.0.0.1 -file rootCA.crt -keystore truststore.jks
+
+
+client cert
+
+req -new -newkey rsa:4096 -nodes -keyout clientrmathew.key –out clientrmathew.csr
+
+
+x509 -req -CA rootCA.crt -CAkey rootCA.key -in clientrmathew.csr -out clientrmathew.crt -days 365 -CAcreateserial
+
+
+pkcs12 -export -out clientrmathew.p12 -name "clientrmathew" -inkey clientrmathew.key -in clientrmathew.
+
+======================================================================================================================================
+

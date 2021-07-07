@@ -1,0 +1,97 @@
+req -newkey rsa:4096 -nodes -keyout serverprivaatekey.pem -x509 -days 365 -out server.crt
+
+pkcs12 -export -out c:/server/keystore.p12 -inkey c:/server/serverPrivateKey.pem -in C:/server/server.crt
+
+used password = password
+
+keytool -import -trustcacerts -alias root -file server.crt -keystore trustStore.jks
+
+password = password
+
+req -new -newkey rsa:4096 -out c:/client/request.csr -keyout c:/client/myPrivateKey.pem -nodes
+
+
+x509 -req -days 360 -in c:/client/request.csr -CA c:/server/server.crt -CAkey c:/server/serverPrivateKey.pem -CAcreateserial
+
+x509 -req -in c:/client/request.csr -CA ca.cer -CAkey ca.key -set_serial 101 -extensions client -days 365 -outform PEM -out roy.crt
+
+
+
+===================================================================
+
+pfx to keystore
+
+Using Keytool run the following command below:
+
+keytool -importkeystore -srckeystore mypfxfile.pfx -srcstoretype pkcs12 -destkeystore clientcert.jks -deststoretype JKS 
+Replace the value highlighted in bold with the name of the PFX file you wish to convert to a Java keystore (JKS)
+Replace the value highlighted in bold to the name of the keystore file you wish to create (it must be a JKS file).
+PLEASE NOTE: You must change the bold-italic text to your own file names.
+
+
+===========================================================================================================================
+
+store ode client cert in JKS keystore
+keytool -importkeystore -srckeystore stage_ui_gateway_opendlrex_com.pfx -srcstoretype PKCS12 -destkeystore clientkeystore.jks -deststoretype JKS
+
+store ode client cert in JKS keystore
+keytool -importkeystore -srckeystore stage_ui_gateway_opendlrex_com.pfx -srcstorepass ^TFCxdr5 -srcstoretype PKCS12 -destkeystore clientkeystore1.jks -deststoretype JKS
+
+
+===========================================================================================================================
+
+we already have a ode client keystore - stage_ui_gateway_opendlrex_com.pfx
+ch
+Load that into a truststore
+
+keytool -importkeystore -srckeystore stage_ui_gateway_opendlrex_com.pfx -srcstoretype PKCS12 -destkeystore truststore.jks -deststoretype JKS
+
+keytool -import -trustcacerts -noprompt -alias ca -ext san=dns:localhost,ip:127.0.0.1 -file rootCA.crt -keystore truststore.jks
+
+keytool -import -trustcacerts -noprompt -alias castage -ext san=dns:stage.ui.gateway.opendlrex.com -file stage-ui-gateway-opendlrex-com-chain.pem -keystore truststore.jks
+
+keytool -importcert -keystore truststore.jks -storepass changeit -file stage-ui-gateway-opendlrex-com-chain.pem -noprompt 
+
+keytool -importkeystore -destkeystore clientstore.pfx -deststoretype PKCS12 -deststorepass 123456 -destkeypass 123456 -srckeystore stage_ui_gateway_opendlrex_com.pfx -srcstoretype PKCS12
+
+===========================================================================================================
+
+Extract the private key
+openssl pkcs12 -in stage_ui_gateway_opendlrex_com.pfx -nocerts -out key.pem -nodes
+
+Extract the cert
+openssl pkcs12 -in stage_ui_gateway_opendlrex_com.pfx -nokeys -out cert.pem
+
+Extract password from private key
+openssl rsa -in key.pem -out server.key
+
+
+=========================================================================================================================================
+
+
+Use ODE PFX file  to create a new keystore
+------------------------------------------
+
+1. Create the keystore (pfx file)
+
+openssl pkcs12 -export -inkey key.pem -in cert.pem -out odeclient.pfx -passout pass:ode0221 -name odeClient
+
+2. Add key store to trust store
+
+keytool -importkeystore -destkeystore truststore.pfx -deststoretype PKCS12 -deststorepass ode0221  -srckeystore odeclient.pfx -srcstorepass ode0221 -srcstoretype PKCS12 -alias odeClient
+
+add pfx to JKS trustStore
+
+keytool -importkeystore -destkeystore truststore.jks -deststoretype JKS -deststorepass ode0221  -srckeystore odeclient.pfx -srcstorepass ode0221 -srcstoretype PKCS12 -alias odeClient
+
+
+3.Add root CA to trust store
+
+keytool -importcert -keystore truststore.pfx -storepass ode0221 -file stage-ui-gateway-opendlrex-com-chain.pem -noprompt -alias odeCACert
+
+store root CA to jks truststore
+keytool -importcert -keystore truststore.jks -storepass ode0221 -file stage-ui-gateway-opendlrex-com-chain.pem -noprompt -alias odeCACert
+
+
+List contents of trustStore
+keytool -list -keystore truststore.pfx -storepass ode0221

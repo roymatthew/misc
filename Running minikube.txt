@@ -1,0 +1,87 @@
+Run powershell as administrator
+PS C:\WINDOWS\system32> Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
+PS C:\WINDOWS\system32>minikube start --vm-driver=hyperv
+
+
+PS C:\WINDOWS\system32> minikube start --vm-driver=hyperv
+* minikube v1.7.2 on Microsoft Windows 10 Pro 10.0.18363 Build 18363
+* Using the hyperv driver based on user configuration
+* Downloading VM boot image ...
+    > minikube-v1.7.0.iso.sha256: 65 B / 65 B [--------------] 100.00% ? p/s 0s
+    > minikube-v1.7.0.iso: 166.68 MiB / 166.68 MiB [-] 100.00% 9.02 MiB p/s 18s
+* Creating hyperv VM (CPUs=2, Memory=2000MB, Disk=20000MB) ...
+* Preparing Kubernetes v1.17.2 on Docker 19.03.5 ...
+* Downloading kubeadm v1.17.2
+* Downloading kubectl v1.17.2
+* Downloading kubelet v1.17.2
+* Launching Kubernetes ...
+* Enabling addons: default-storageclass, storage-provisioner
+* Waiting for cluster to come online ...
+* Done! kubectl is now configured to use "minikube"
+! C:\Program Files\Docker\Docker\Resources\bin\kubectl.exe is version 1.10.11, and is incompatible with Kubernetes 1.17.2. You will need to update C:\Program Files\Docker\Docker\Resources\bin\kubectl.exe or use 'minikube kubectl' to connect with this cluster
+
+Commands
+========
+
+ kubectl run nginx --image=nginx
+ kubectl get pods
+ 
+  kubectl apply -f first-pod.yml --validate=false (--validate=false is needed to override the kubectl installed with docker.)
+  
+  kubectl describe pod mockre 
+  
+  kubectl -it  nginex-4m4jj sh
+  
+  minikube ip (will return the ip address of the minikube cluster)
+  using a yaml file to define a service, we can map a port number greater than or equal to 30080 to a port on the container
+  then we can use a browser to access the container port like http://ip of minikube: configured port in the service
+  eg: http://192.168.163.157:30080/
+  
+  
+  kubectl descibe pod greetingdev 
+  
+  #print ip address of minikube (kubernetes cluser)
+  minikube ip  
+  
+  Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
+  minikube start --vm-driver=hyperv 
+  
+  Pushing images to docker hub
+  -----------------------------
+  docker tag rmathew/greeting-svc:1.0 roymathews/greeting-svc-prod
+  
+  docker login --username=roymathews --password=************
+  docker push rmathews/greeting-svc-prod
+ 
+Docker and misc commands
+============================================================================== 
+
+docker image rm <imagename>
+  
+  docker login --username=roymathews --password=*************
+  
+  sudo docker push roymathews/greeting-svc-prod
+  sudo docker push roymathews/greeting-svc-dev
+  
+  
+  docker tag rmathew/greeting-svc:1.0 roymathews/greeting-svc-prod
+  docker tag rmathew/greeting-svc:2.0 roymathews/greeting-svc-dev
+  
+  192.168.163.150:30082/greet
+  192.168.163.150:30083/greet
+  
+  
+  docker push roymathews/k8s-cj-svc
+  docker push roymathews/k8s-crypto-svc
+  
+  docker pull roymathews/k8s-cj-svc:1.0
+  docker pull roymathews/k8s-crypto-svc:1.0
+  
+  kubectl apply -f cv-workload.yaml --validate=false
+  
+  docker push roymathews/k8s-cv-simulator
+  docker pull roymathews/k8s-cv-simulator:1.0
+  
+  
+  
+  
